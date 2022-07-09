@@ -39,8 +39,19 @@ def create_ships(board):
         board[ship_row][ship_column] = 'X'
 
 
+# User input for shot location
 def guess_ship_location():
-    pass
+    row = input('Argh! What be the longitude to fire upon? Pick a row 1-8\n')
+    while row not in '12345678':
+        print('These be bad coordinates, try again!\n')
+        row = input('What be the longitude to fire upon? Pick a row, 1-8\n')
+
+    column = input('Avast! Now the latitude! Pick a column A-H\n').upper()
+    while column not in 'ABCDEFGH':
+        print('This is out of our range, try again between A-H!\n')
+        column = input('Avast! Now the latitude! Pick a column A-H\n').upper()
+
+    return int(row) - 1, letters_to_numbers[column]
 
 
 def count_hits():
