@@ -7,6 +7,11 @@ Game Legend
 
 from random import randint
 
+# Global variable for number of ships
+SHIPS = 5
+# Globl variable for total number of turns
+TURNS = 8
+
 # Board for user ship locations
 player_board = [[" "] * 8 for x in range(8)]
 
@@ -21,8 +26,10 @@ letters_to_numbers = {
     }
 
 
-# Creates the layout of the game board
 def print_board(board):
+    """
+    Creates the layout of the game board
+    """
     print('  A B C D E F G H')
     print('  ---------------')
     row_number = 1
@@ -31,17 +38,21 @@ def print_board(board):
         row_number += 1
 
 
-# Creates 5 ships at random positions on the board
 def create_ships(board):
-    for ship in range(5):
+    """
+    Creates 5 ships at random positions on the board
+    """
+    for _ in range(SHIPS):
         ship_row, ship_column = randint(0, 7), randint(0, 7)
         while board[ship_row][ship_column] == 'X':
             ship_row, ship_column = randint(0, 7), randint(0, 7)
         board[ship_row][ship_column] = 'X'
 
 
-# User input for shot location
 def guess_ship_location():
+    """
+    User input for shot location
+    """
     row = input('Argh! What be the longitude to fire upon? Pick a row 1-8:\n')
     while row not in '12345678':
         print('These be bad coordinates, try again!\n')
@@ -55,8 +66,10 @@ def guess_ship_location():
     return int(row) - 1, letters_to_numbers[column]
 
 
-# Checks if shot hit or missed
 def count_hits(board):
+    """
+    Checks if shot hit or missed
+    """
     count = 0
     for row in board:
         for column in row:
@@ -66,8 +79,8 @@ def count_hits(board):
 
 
 create_ships(player_board)
-turns = 10
-while turns > 0:
+turns_taken = 0
+while turns_taken < TURNS:
     print('Ahoy matey! Welcome to battleship!\n')
     print_board(computer_board)
     row, column = guess_ship_location()
@@ -78,19 +91,19 @@ while turns > 0:
     elif player_board[row][column] == 'X':
         print('Shiver me timbers! That be a hit matey!')
         computer_board[row][column] = 'X'
-        turns -= 1
+        turns_taken += 1
 
     else:
         print('That be a missed shot ya scallywag!')
         computer_board[row][column] = '-'
-        turns -= 1
+        turns_taken += 1
 
     if count_hits(computer_board) == 5:
         print('Congratulations! You be a real pirate captain! All ships sunk!')
         break
 
-    print('You have ' + str(turns) + ' turns remaining')
+    print('You have ' + str(TURNS - turns_taken) + ' turns remaining')
 
-    if turns == 0:
+    if turns_taken == TURNS:
         print('You ran out of shots, luck be with you next time!')
         break
