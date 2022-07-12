@@ -24,11 +24,18 @@ A link to the deployed site can be found [here](github link goes here).
 * If the user chooses a shot location not on the grid, the game informs them the coordinates are not valid and to try again.
 
 ## Features
+
+* Randomized ship locations on playing board.
+* Validated user input for shot coordinates - checks initial shots and also for duplicate shot locations. If the chosen point is not on the grid, the game tells the user to input a valid position. If the user fires on a duplicate location, the game tells the user this has already been used and to choose a new set of coordinates.
+* Informs the user if the selected coordinates are a hit or miss. 
+* Informs user the number of shots remaining.
+* Informs the user the game is over, either with no remaining shots or that all ships have been destroyed.
+
 * Starting Screen - The game initializes
 
 ![Starting image](./assets/images/starting-image.png)
 
-* Game Page - 
+* Game Page - Asks the user to input a set of coordinates to fire on the game board.
 
 ![Game Image](./assets/images/game-image.png)
 
@@ -37,7 +44,7 @@ A link to the deployed site can be found [here](github link goes here).
 ![Results Page Image](./assets/images/results-page.png)
 
 ## Features Left to Implement
-* A future feature I would like to add is an option for the user to select the position of their own ships on the grid.
+* A future feature I would like to add is an option for the user to select the position of their own ships on the grid, as well as the size of the game grid.
 
 ## Testing
 * This project was primarily built in Google Chrome but also in Firefox. It was tested in Microsoft Edge, Firefox and Safari browsers. 
@@ -94,15 +101,3 @@ Python
 1. Love Maths Project - An obvious help. Although I didn't make a game, the foundations were very helpful. 
 
 2. Youtube: Web Dev Simplified - "Build a Quiz App with Javascript" - This was a great resource for this project. I went through this video multiple times. Great for starting with the basics.
-
-3. Youtube: Coding with Nick - "Create a Quiz App using HTML CSS & JavaScript" - This was another solid video. He explains a bit more about why things are set in a particular way. 
-
-4. Lots of StackOverflow threads. Too many to count.
-
-5. Reddit, specifically r/learnjavascript and r/learnprogramming. I didn't really use any code there but more just for different ideas on problem solving and thinking outside the box. 
-
-6. Credit to my mentor for providing guidance on best practice tips.
-
-### Media
-1. Favicon: https://github.com/twitter/twemoji/blob/master/assets/svg/1f916.svg
-2. Button sourced from: https://getcssscan.com/css-buttons-examples - number 56.
