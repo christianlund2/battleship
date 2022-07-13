@@ -9,7 +9,7 @@ from random import randint
 
 # Global variable for number of ships
 SHIPS = 5
-# Globl variable for total number of turns
+# Global variable for total number of turns
 TURNS = 8
 
 # Board for user ship locations
@@ -78,32 +78,63 @@ def count_hits(board):
     return count
 
 
-create_ships(player_board)
-turns_taken = 0
-while turns_taken < TURNS:
-    print('Ahoy matey! Welcome to battleship!\n')
-    print_board(computer_board)
-    row, column = guess_ship_location()
-
-    if computer_board[row][column] == '-':
-        print('Argh, you already shot there! Try again!')
-
-    elif player_board[row][column] == 'X':
-        print('Shiver me timbers! That be a hit matey!')
-        computer_board[row][column] = 'X'
-        turns_taken += 1
-
+def prompt1():
+    """
+    User input for difficulty setting
+    """
+    answer = input("Select 1 for Easy or 2 for Difficult: ")
+    if answer == '1':
+        print('Easy mode selected! You have 8 turns.')
+    elif answer == '2':
+        print('Difficult mode selected! You have 5 turns.')
+        global TURNS
+        TURNS = 5
     else:
-        print('That be a missed shot ya scallywag!')
-        computer_board[row][column] = '-'
-        turns_taken += 1
+        print("You didn't pick 1 or 2, try again.")
+        prompt1()
 
-    if count_hits(computer_board) == 5:
-        print('Congratulations! You be a real pirate captain! All ships sunk!')
-        break
 
-    print('You have ' + str(TURNS - turns_taken) + ' turns remaining')
+def new_game():
+    """
+    Starts a new game
+    """
+    create_ships(player_board)
+    turns_taken = 0
+    while turns_taken < TURNS:
 
-    if turns_taken == TURNS:
-        print('You ran out of shots, luck be with you next time!')
-        break
+        if turns_taken == 0:
+            print('Ahoy matey! Welcome to battleship!\n')
+            prompt1()
+            print_board(computer_board)
+            row, column = guess_ship_location()
+
+        else:
+            print_board(computer_board)
+            row, column = guess_ship_location()
+
+        if computer_board[row][column] == '-':
+            print('Argh, you already shot there! Try again!')
+
+        elif player_board[row][column] == 'X':
+            print('Shiver me timbers! That be a hit matey!')
+            computer_board[row][column] = 'X'
+            turns_taken += 1
+
+        else:
+            print('That be a missed shot ya scallywag!')
+            computer_board[row][column] = '-'
+            turns_taken += 1
+
+        if count_hits(computer_board) == 5:
+            print('Congrats! You be a real pirate captain! All ships sunk!')
+            break
+
+        print('You have ' + str(TURNS - turns_taken) + ' turns remaining')
+
+        if turns_taken == TURNS:
+            print('You ran out of shots, luck be with you next time!')
+            break
+
+
+if __name__ == "__main__":
+    new_game()
