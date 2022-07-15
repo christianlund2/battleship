@@ -30,13 +30,13 @@ def print_board(board):
     """
     Creates the layout of the game board
     """
-    print('    A B C D E F G H')
-    print('  +--+-+-+-+-+-+--+')
+    print('    A B C D E F G')
+    print('  +--+-+-+-+-+--+')
     row_number = 1
     for row in board:
         print("%d | %s |" % (row_number, "|".join(row)))
         row_number += 1
-    print('  +--+-+-+-+-+-+--+')
+    print('  +--+-+-+-+-+--+')
 
 
 def create_ships(board):
