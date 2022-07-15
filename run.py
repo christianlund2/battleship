@@ -12,17 +12,17 @@ SHIPS = 5
 # Global variable for total number of turns
 TURNS = 8
 
-# Board for user ship locations
-player_board = [[" "] * 8 for x in range(8)]
+# Board for user ship locations, holds ship positions
+player_board = [[" "] * 7 for x in range(7)]
 
-# Board for computer ship locations
-computer_board = [[" "] * 8 for x in range(8)]
+# Board for player shots, shows hits and misses
+hidden_board = [[" "] * 7 for x in range(7)]
 
 letters_to_numbers = {
     'A': 0, 'B': 1,
     'C': 2, 'D': 3,
     'E': 4, 'F': 5,
-    'G': 6, 'H': 7
+    'G': 6
     }
 
 
@@ -30,12 +30,13 @@ def print_board(board):
     """
     Creates the layout of the game board
     """
-    print('  A B C D E F G H')
-    print('  ---------------')
+    print('    A B C D E F G H')
+    print('  +--+-+-+-+-+-+--+')
     row_number = 1
     for row in board:
         print("%d | %s |" % (row_number, "|".join(row)))
         row_number += 1
+    print('  +--+-+-+-+-+-+--+')
 
 
 def create_ships(board):
@@ -43,9 +44,9 @@ def create_ships(board):
     Creates 5 ships at random positions on the board
     """
     for _ in range(SHIPS):
-        ship_row, ship_column = randint(0, 7), randint(0, 7)
+        ship_row, ship_column = randint(0, 6), randint(0, 6)
         while board[ship_row][ship_column] == 'X':
-            ship_row, ship_column = randint(0, 7), randint(0, 7)
+            ship_row, ship_column = randint(0, 6), randint(0, 6)
         board[ship_row][ship_column] = 'X'
 
 
@@ -53,15 +54,15 @@ def guess_ship_location():
     """
     User input for shot location
     """
-    row = input('Argh! What be the longitude to fire upon? Pick a row 1-8:\n')
-    while row not in '12345678':
+    row = input('Argh! What be the longitude to fire upon? Pick a row 1-7:\n')
+    while row not in '1234567':
         print('These be bad coordinates, try again!\n')
-        row = input('What be the longitude to fire upon? Pick a row, 1-8:\n')
+        row = input('What be the longitude to fire upon? Pick a row, 1-7:\n')
 
-    column = input('Avast! Now the latitude! Pick a column A-H:\n').upper()
-    while column not in 'ABCDEFGH':
-        print('This is out of our range, try again between A-H!:\n')
-        column = input('Avast! Now the latitude! Pick a column A-H:\n').upper()
+    column = input('Avast! Now the latitude! Pick a column A-G:\n').upper()
+    while column not in 'ABCDEFG':
+        print('This is out of our range, try again between A-G!:\n')
+        column = input('Avast! Now the latitude! Pick a column A-G:\n').upper()
 
     return int(row) - 1, letters_to_numbers[column]
 
@@ -78,7 +79,7 @@ def count_hits(board):
     return count
 
 
-def prompt1():
+def difficulty():
     """
     User input for difficulty setting
     """
@@ -91,7 +92,7 @@ def prompt1():
         TURNS = 5
     else:
         print("You didn't pick 1 or 2, try again.")
-        prompt1()
+        difficulty()
 
 
 def new_game():
@@ -104,28 +105,28 @@ def new_game():
 
         if turns_taken == 0:
             print('Ahoy matey! Welcome to battleship!\n')
-            prompt1()
-            print_board(computer_board)
+            difficulty()
+            print_board(hidden_board)
             row, column = guess_ship_location()
 
         else:
-            print_board(computer_board)
+            print_board(hidden_board)
             row, column = guess_ship_location()
 
-        if computer_board[row][column] == '-':
+        if hidden_board[row][column] == '-':
             print('Argh, you already shot there! Try again!')
 
         elif player_board[row][column] == 'X':
             print('Shiver me timbers! That be a hit matey!')
-            computer_board[row][column] = 'X'
+            hidden_board[row][column] = 'X'
             turns_taken += 1
 
         else:
             print('That be a missed shot ya scallywag!')
-            computer_board[row][column] = '-'
+            hidden_board[row][column] = '-'
             turns_taken += 1
 
-        if count_hits(computer_board) == 5:
+        if count_hits(hidden_board) == 5:
             print('Congrats! You be a real pirate captain! All ships sunk!')
             break
 
