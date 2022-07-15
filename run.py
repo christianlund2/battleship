@@ -54,15 +54,15 @@ def guess_ship_location():
     """
     User input for shot location
     """
-    row = input('Argh! What be the longitude to fire upon? Pick a row 1-7:\n')
+    row = input('Argh! What be the latitude to fire upon? Pick a row 1-7:\n')
     while row not in '1234567':
         print('These be bad coordinates, try again!\n')
-        row = input('What be the longitude to fire upon? Pick a row, 1-7:\n')
+        row = input('What be the latitude to fire upon? Pick a row, 1-7:\n')
 
-    column = input('Avast! Now the latitude! Pick a column A-G:\n').upper()
+    column = input('Argh! Now the longitude! Pick a column A-G:\n').upper()
     while column not in 'ABCDEFG':
         print('This is out of our range, try again between A-G!:\n')
-        column = input('Avast! Now the latitude! Pick a column A-G:\n').upper()
+        column = input('Argh! Now the longitude! Pick a column A-G:\n').upper()
 
     return int(row) - 1, letters_to_numbers[column]
 
