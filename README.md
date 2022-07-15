@@ -18,20 +18,24 @@ A link to the deployed site can be found [here](github link goes here).
 
 ## Design
 
-#### Grid and Ship size
-* I chose to implement a 8x8 grid size for this game because I feel it is a large enough map to make the game difficult without being impossible to find opponent ships. 
+#### Grid and Ship Size
+* I chose to implement a 7x7 grid size for this game because I feel it is a large enough map to make the game difficult without being impossible to find opponent ships. 
 * I chose to have ships as a 1x1 square size and positioned randomly on the board to have a true random game setup.
 * If the user chooses a shot location not on the grid, the game informs them the coordinates are not valid and to try again.
 
+
 ## Features
 
+* In 'Easy Mode', the user gets 8 shots to fire, in 'Difficult Mode', the user only gets 5 shots.
 * Randomized ship locations on playing board.
-* Validated user input for shot coordinates - checks initial shots and also for duplicate shot locations. If the chosen point is not on the grid, the game tells the user to input a valid position. If the user fires on a duplicate location, the game tells the user this has already been used and to choose a new set of coordinates.
+* Validated user input for shot coordinates - checks initial shots and also for duplicate shot locations.
+* If the chosen point is not on the grid, the game tells the user to input a valid position. 
+* If the user fires at a position that has already been used, the game informs them the coordinates have been used and to choose again. 
 * Informs the user if the selected coordinates are a hit or miss. 
 * Informs user the number of shots remaining.
 * Informs the user the game is over, either with no remaining shots or that all ships have been destroyed.
 
-* Starting Screen - The game initializes
+* Starting Screen - The game initializes, welcomes the user and asks for the desired difficulty setting.
 
 ![Starting image](./assets/images/starting-image.png)
 
@@ -43,49 +47,30 @@ A link to the deployed site can be found [here](github link goes here).
 
 ![Results Page Image](./assets/images/results-page.png)
 
+* Game Over - After all shots have been fired or all ships have been sunk, the game ends.
+
+![Results Page Image](./assets/images/results-page.png)
+
 ## Features Left to Implement
 * A future feature I would like to add is an option for the user to select the position of their own ships on the grid, as well as the size of the game grid.
 
 ## Testing
-* This project was primarily built in Google Chrome but also in Firefox. It was tested in Microsoft Edge, Firefox and Safari browsers. 
-* The 'Play', 'Submit', and 'Reload' buttons all work as intended, moving to the next page or question.
-* When running Lighthouse for Desktop, the SEO comes back limited due to links not being crawlable. But the links are from third parties and not from my own code. 
-* When running Lighthouse for Mobile, the performance was limited but was remedied by removing the fontawesome script from the index and game html files. 
+*  This project passed through PEP8 with no issues returned.
 
-* Lighthouse Desktop - Index Page
+![PEP8 Testing Image](./assets/images/PEP8.png)
 
-![Lighthouse Desktop Index Image](./assets/images/lighthouse-index-desktop.png)
-
-* Lighthouse Desktop - Game Page
-
-![Lighthouse Desktop Game Image](./assets/images/lighthouse-game-desktop.png)
-
-* Lighthouse Mobile - Index Page
-
-![Lighthouse Mobile Index Image](./assets/images/lighthouse-index-mobile.png)
-
-* Lighthouse Mobile - Game Page
-
-![Lighthouse Mobile Game Image](./assets/images/lighthouse-game-mobile.png)
-
-### Validator Testing
-HTML
-* No errors were returned when passing through the official [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fchristianlund2.github.io%2Fvery-varied-quiz%2Fgame.html).
-
-JavaScript 
-* When run through JShint I had a lot of missing semi-colons. There were variables that I named or intended to use when wireframing that were not used and later removed. JShint was also giving me warnings when I used const for variables, this was fixed by adding '/*jshint esversion: 6 */' to the top of my js file. 
-
-Python
+### Bugs
+* When creating the difficulty setting, the 'Difficult Mode' didn't work. It would default to 'Easy Mode' despite the number 2 being selected. This was due to a typo on line 89, the number was '1' from the copy/paste of the 'Easy Mode' not being corrected. 
 
 ### Unfixed Bugs
-* Unfixed bugs go here
 
 ## Deployment
-1. This site was deployed to GitHub pages. 
-* In the "battleship" repository, click on the "Settings" tab.
-* Under "Code and Automation", select the "Pages" section.
-* Under Source, change from "Branch: None" to "Branch: Main" and click "Save".
-* After a few minutes, a banner appears confirming the site is published with a live link. 
+1. This site was deployed to Heroku. 
+* Create a fork or a clone of the 'Battleship" repository.
+* Go to the Heroku page, and create a new app.
+* When selecting the buildbacks, choose python and NodeJS, in that order.
+* Link the create Heroku app to the "Battleship" repository.
+* Select 'Deploy'.
 
 ### How to make a clone
 * While in your repository, click the code button.
@@ -96,8 +81,18 @@ Python
 * Type git clone and then paste the URL of the cloned repository.
 * Press Enter, to create your local clone to your chosen directory.
 
-## Credits
+## Credits and Acknowledgements
 
-1. Love Maths Project - An obvious help. Although I didn't make a game, the foundations were very helpful. 
+1. Code Institute and the Love Sandwiches walkthrough.
 
-2. Youtube: Web Dev Simplified - "Build a Quiz App with Javascript" - This was a great resource for this project. I went through this video multiple times. Great for starting with the basics.
+2. Youtube: "How to Code Battleship in Python - Single Player Game" by Knowledge Mavens, and the creators' associated GitHub, Garrett Broughton.
+
+3. Pythondex - Python Battleship Game
+
+4. The reddit community "r/learnpython" for tips and considerations.
+
+5. Geeks for Geeks 
+
+6. Stack Overflow.
+
+7. My lovely wife for help with the difficulty function.
